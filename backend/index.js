@@ -1,22 +1,19 @@
+require("dotenv").config();
 const express = require("express");
-const { connect } = require("./config/db.config");
+const mongoose = require("mongoose");
 const app = express();
 app.use(express.json());
 
-require("dotenv").config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
+
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
-const contactRoutes = require("./routes/contacts.router");
-app.use("/contacts", contactRoutes);
-
-const adminRoutes = require("./routes/admin.routes");
-app.use("/admin", adminRoutes);
-
-app.listen(PORT, (err) => {
-  if (err) throw new Error(err);
-  console.log(`Server is listining on port ${PORT}`);
-  connect();
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
 });

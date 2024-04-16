@@ -1,24 +1,41 @@
+
+
 import { createSlice } from "@reduxjs/toolkit";
+import { loginUserAPI, signupUserAPI } from "../../app/api/Userapi.jsx"; 
 
-const authSlice=createSlice({
-    name:'auth',
-    initialState:{user:null ,token:null},
-    reducers :{
-        setCredentials:(state ,action)=>{
-            const {user, accessToken}=action.payload
-            state.user = user
-            state.token = accessToken
+const authSlice = createSlice({
+  name: "auth",
+  initialState: { user: null, token: null },
+  reducers: {
+    setUser: (state, action) => {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+    },
+    clearUser: (state) => {
+      state.user = null;
+      state.token = null;
+      localStorage.removeItem("token");
+    },
+  },
+});
 
-        },
-        logOut:(state,action)=>{
-            state.user=null
-            state.token=null
-        }
-    }
-}
-)
+export const { setUser, clearUser } = authSlice.actions;
 
-export const{setCredentials,logOut}=authSlice.actions
-export default authSlice.reducer
-export const selectCurrentUser=(state)=>state.authSlice=state.auth.user
-export const selectCurrentToken=(state)=>state.authSlice=state.auth.token
+export const loginUser = (credentials) => async (dispatch) => {
+  try {
+    const response = await loginUserAPI(credentials);
+    dispatch(setUser(response.data)); 
+  } catch (error) {
+  }
+};
+
+export const signupUser = (userData) => async (dispatch) => {
+  try {
+    const response = await signupUserAPI(userData);
+    dispatch(setUser(response.data)); 
+  } catch (error) {
+ 
+  }
+};
+
+export default authSlice.reducer;
