@@ -24,6 +24,9 @@ app.use(cors());
 const authRoutes = require("./routes/auth.routes");
 app.use("/api", authRoutes);
 
+const taskRoutes = require("./routes/task.route");
+app.use("/task", taskRoutes);
+
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });

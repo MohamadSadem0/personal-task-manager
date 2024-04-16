@@ -32,7 +32,7 @@ exports.login = async (req, res) => {
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "1h" }
     );
-    res.json({ token });
+    res.json({ /*user,*/ token });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal server error" });
