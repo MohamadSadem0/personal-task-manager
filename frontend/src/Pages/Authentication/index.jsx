@@ -14,7 +14,7 @@ const Authentication = () => {
     <div className="max-w-md flex flex-col h-100 w-50% mx-auto mt-8 p-4 bg-white border rounded shadow-lg">
 
       {isLoginForm ? <LoginForm /> : <SignupForm className="flex flex-col" />}
-      <button onClick={toggleForm} className="text-blue-500 hover:underline ">
+      <button onClick={toggleForm} className="text-blue-500 hover:underline mt-4   ">
         {isLoginForm ? "Create an account" : "Already have an account? Sign In"}
       </button>
     </div>

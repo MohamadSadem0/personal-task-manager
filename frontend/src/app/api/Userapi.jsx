@@ -1,17 +1,26 @@
-import axios from "axios"
+import axios from "axios";
+
 export const loginUserAPI = async (credentials) => {
   try {
-    const response = await axios.post("/api/login", credentials);
-    console.log(response);
-    return response.data;
+    const response = await axios.post(
+      "http://localhost:3001/api/login",
+      credentials
+    );
+    console.log(response); 
+    return response.data; 
   } catch (error) {
+   
+
     throw error;
   }
 };
 
 export const signupUserAPI = async (userData) => {
   try {
-    const response = await axios.post("/api/signup", userData);
+    const response = await axios.post(
+      " http://localhost:3001/api/signup",
+      userData
+    );
     return response.data;
   } catch (error) {
     throw error;

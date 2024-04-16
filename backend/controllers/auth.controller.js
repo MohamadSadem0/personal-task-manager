@@ -18,6 +18,7 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(req.body);
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ message: "Invalid email or password" });
@@ -26,12 +27,12 @@ exports.login = async (req, res) => {
     if (!isValidPassword) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
-    const accessToken = jwt.sign(
+    const token = jwt.sign(
       { userId: user._id },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "1h" }
     );
-    res.json({ accessToken });
+    res.json({ token });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal server error" });

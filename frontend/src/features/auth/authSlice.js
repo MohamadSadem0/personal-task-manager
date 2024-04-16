@@ -8,8 +8,10 @@ const authSlice = createSlice({
   initialState: { user: null, token: null },
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload.user;
+      // state.user = action.payload.user;
       state.token = action.payload.token;
+      localStorage.setItem("token", action.payload.token);
+
     },
     clearUser: (state) => {
       state.user = null;
@@ -24,6 +26,9 @@ export const { setUser, clearUser } = authSlice.actions;
 export const loginUser = (credentials) => async (dispatch) => {
   try {
     const response = await loginUserAPI(credentials);
+    console.log(response)
+   const { token } = response.data;
+   localStorage.setItem("token", token);
     dispatch(setUser(response.data)); 
   } catch (error) {
   }
