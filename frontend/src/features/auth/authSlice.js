@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { loginUserAPI, signupUserAPI } from "../../app/api/Userapi.jsx"; 
 
 const authSlice = createSlice({
+
   name: "auth",
   initialState: { user: null, token: null },
   reducers: {
@@ -26,10 +27,12 @@ export const { setUser, clearUser } = authSlice.actions;
 export const loginUser = (credentials) => async (dispatch) => {
   try {
     const response = await loginUserAPI(credentials);
-    console.log(response)
+    
    const { token } = response.data;
+
    localStorage.setItem("token", token);
-    dispatch(setUser(response.data)); 
+   dispatch(setUser(response.data)); 
+
   } catch (error) {
   }
 };

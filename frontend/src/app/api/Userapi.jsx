@@ -6,7 +6,7 @@ export const loginUserAPI = async (credentials) => {
       "http://localhost:3001/api/login",
       credentials
     );
-    console.log(response); 
+    
     return response.data; 
   } catch (error) {
    
