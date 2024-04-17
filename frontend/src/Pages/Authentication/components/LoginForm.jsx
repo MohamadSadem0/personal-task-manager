@@ -13,7 +13,8 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       await dispatch(loginUser({ email, password }));
-      navigate("/home"); 
+      
+      // navigate("/home"); 
     } catch (error) {
       console.error("Error logging in:", error);
     }
